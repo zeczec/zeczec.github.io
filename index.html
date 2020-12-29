@@ -5,18 +5,6 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
       <meta name="viewport" content="width=device-width">
       <meta name="description" content="Labs">
-
-      <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-28377356-1']);
-        _gaq.push(['_trackPageview']);
-        
-        (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-      </script>
       <style type="text/css">
         body { 
           background-color: #fff; 
@@ -29,12 +17,17 @@
         header { 
           flex: 1;
           text-align: center;
+        }
+        h1 {
           font-size: 1px; 
           color: transparent;
-          text-align: center;
         }
         .logomark {
           animation: rotate 4s linear infinite;
+        }
+        .redirecting {
+          color: #999;
+          font-size: 11px;
         }
         @keyframes rotate {
           0% { transform: rotate(180deg); }
@@ -47,7 +40,25 @@
     <header>
       <img src="./logomark.svg" alt="" class="logomark" width="100">
       <h1>嘖嘖實驗室</h1>
+      <p class="redirecting" hidden>轉址中</p>
     </header>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28377356-1']);
+      _gaq.push(['_trackPageview']);
 
+      (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+      if (location.hash.startsWith('#p/')) {
+        const projectName = location.hash.replace('#p/', '')
+        const redirect = document.querySelector('.redirecting')
+        redirect.hidden = false
+        location.href = `https://www.zeczec.com/projects/${projectName}`
+      }
+    </script>
   </body>
 </html>
